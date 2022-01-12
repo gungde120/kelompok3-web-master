@@ -1,9 +1,14 @@
 #app {
     font-family: 'Montserrat', sans-serif;
+    min-height: 900px;
 }
 
 .router-link-exact-active {
     font-weight: bold;
+}
+
+.table {
+    width: 98%;
 }
 
 .banner {
@@ -30,7 +35,7 @@
     background-color: #4EB883;
 }
 
-.card-product {
+.card {
     border-radius: 15px;
 }
 
@@ -55,5 +60,6 @@
 }
 
 .footer {
-    padding-bottom: 500px;
+    position: absolute;
+    margin-bottom: 0;
 }

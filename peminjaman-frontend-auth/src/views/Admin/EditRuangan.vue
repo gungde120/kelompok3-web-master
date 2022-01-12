@@ -43,11 +43,11 @@
                             <div class="mt-2">Jumlah Meja Terbaru : <strong>{{ meja }}</strong></div>
                         </div>
                     <hr />
-                        <button type="submit" class="btn btn-success mr-3" @click="editRuangan(product.id)">
+                        <button type="submit" class="btn btn-success" @click="editRuangan(product.id)">
                         Simpan
                         </button>
                         <router-link to="/admin/ruangan">
-                            <button type="submit" class="btn btn-danger">
+                            <button type="submit" class="btn btn-danger ml-3">
                             Cancel
                             </button>
                         </router-link>

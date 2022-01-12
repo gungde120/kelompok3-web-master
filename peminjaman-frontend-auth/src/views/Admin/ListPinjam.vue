@@ -3,7 +3,7 @@
         <Sidebar />
         <div class="col">
             <div class="keranjang">
-                <div class="ml-3">
+                <div class="ml-2">
 
                 <div class="row">
                     <div class="col mt-3">
@@ -16,46 +16,50 @@
                         <thead>
                             <tr>
                             <th scope="col">No.</th>
+                            <th scope="col">Nama Lengkap</th>
+                            <th scope="col">Email</th>
                             <th scope="col">Ruangan</th>
                             <th scope="col">Tanggal</th>
                             <th scope="col">Jam</th>
                             <th scope="col">Keperluan</th>
                             <th scope="col">Status</th>
-                            <th scope="col">Konfirmasi</th>
+                            <th scope="col">Approval</th>
                             <th scope="col">Hapus</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr v-for="(keranjang, index) in keranjangs" :key="keranjang.id">
                             <th>{{index+1}}</th>
+                            <td >{{ keranjang.nama_lengkap }}</td>
+                            <td >{{ keranjang.email }}</td>
                             <td>
-                                <strong>{{ keranjang.products.nama }}</strong>
+                                <strong>{{ keranjang.products.kode }}</strong>
                             </td>
                             <!-- TGL -->
                             <td >{{ keranjang.tgl_pinjam }}</td>
                             <!-- JAM -->
                             <td >{{ keranjang.jam_start }} - {{ keranjang.jam_end }} </td>
                             <!-- KEPERLUAN -->
-                            <td >{{ keranjang.keterangan ? keranjang.keterangan : "-" }}</td>
+                            <td class="">{{ keranjang.keterangan ? keranjang.keterangan : "-" }}</td>
 
                             <!-- STATUS -->
                             <td ><strong>{{ keranjang.status }}</strong></td>
                             <td > 
                                 <div>
-                                    <button type="button" class="btn btn-success mr-2" @click="terimapinjam(keranjang.id)">
-                                        Terima
+                                    <button type="button" class="btn btn-success mr-2 mb-2" @click="terimapinjam(keranjang.id)">
+                                        OK
                                     </button>
                                 <!-- <hr> -->
-                                    <button type="button" class="btn btn-danger" @click="tolakpinjam(keranjang.id)">
-                                        Tolak
+                                    <button type="button" class="btn btn-danger mb-2" @click="tolakpinjam(keranjang.id)">
+                                        Cancel
                                     </button>
                                 </div>
                             </td>
 
                             <!-- HAPUS -->
                             <td>
-                                <button type="button" class="btn btn-danger" @click="hapusKeranjang(keranjang.id)">
-                                    Delete
+                                <button type="button" class="btn btn-danger mb-2" @click="hapusKeranjang(keranjang.id)">
+                                    Hapus
                                 </button>   
                             </td>
                             
@@ -95,7 +99,7 @@
         terimapinjam(id) {
         axios
             .patch("http://localhost:3000/keranjangs/" + id, {
-                status: "Diterima"
+                status: "OK"
             })
             .then(() => {
             this.$router.push({ path: "/admin/peminjaman"})
@@ -119,7 +123,7 @@
         tolakpinjam(id) {
         axios
             .patch("http://localhost:3000/keranjangs/" + id, {
-                status: "Ditolak"
+                status: "Cancel"
             })
             .then(() => {
             this.$router.push({ path: "/admin/peminjaman"})
@@ -144,12 +148,13 @@
         axios
             .delete("http://localhost:3000/keranjangs/" + id)
             .then(() => {
-            this.$toast.error("Sukses Hapus Peminjaman", {
-                type: "error",
-                position: "top-right",
-                duration: 3000,
-                dismissible: true,
-            });
+            this.$router.push({ path: "/admin/peminjaman"});
+            // this.$toast.error("Sukses Hapus Peminjaman", {
+            //     type: "error",
+            //     position: "top-right",
+            //     duration: 3000,
+            //     dismissible: true,
+            // });
 
             // Update Data keranjang
             axios
@@ -165,6 +170,11 @@
         .get("http://localhost:3000/keranjangs")
         .then((response) => this.setKeranjangs(response.data))
         .catch((error) => console.log(error));
+    },
+    computed: {
+    currentUser() {
+        return this.$store.state.auth.user;
+        }
     },
 };
 </script>

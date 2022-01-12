@@ -25,12 +25,17 @@
         <!-- <Pesanan />
         </div> -->
     </div>
+    <div class="mr-5 ml-5">
+        <hr>
+        <!-- tabel peminjaman universal-->
+        <Pesanan />
+    </div>
 </template>
 
     <script>
     // @ is an alias to /src
     // import Navbar from "@/components/Navbar.vue";
-    // import Pesanan from '../components/Pesanan.vue';
+    import Pesanan from "@/components/Pesanan.vue";
     import Card from "@/components/Card.vue";
     import axios from "axios";
     //import NavbarUser from "@/components/NavbarUser.vue";
@@ -42,7 +47,7 @@
         Card,
         //NavbarUser,
         
-        // Pesanan,
+        Pesanan,
     },
     data() {
         return {

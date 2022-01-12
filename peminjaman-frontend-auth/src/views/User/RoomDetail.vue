@@ -4,7 +4,7 @@
       <div class="container">
           <div class="row mt-4">
             <div class="col-md-4">
-              <img :src=" '/images/' + product.gambar" class="img-fluid" style="max-width:300px" alt="">
+              <img :src=" '/images/' + product.gambar" class="img-fluid" style="max-width:350px" alt="">
               <hr>
               <h2>
                 <strong>{{ product.nama }}</strong>
@@ -21,54 +21,75 @@
                 <strong>{{ product.meja }}</strong>
               </h5>
             </div>
-            <div class="col-md-6">
+
+            <div class="col">
 
           <form v-on:submit.prevent>
             <h3>
               <strong>
                 Form Peminjaman
               </strong>
-              </h3>
+            </h3>
+
+            <div class="form-group">
+              <label for="jam_start">Nama Lengkap</label>
+              <br>
+              <input class="w-100 p-2" type="text" aria-label="Nama Lengkap" placeholder="Nama lengkap" v-model="pesan.nama_lengkap">
+            </div>
+
+            <div class="form-group">
+              <label for="jam_start">Instansi</label>
+              <br>
+              <input class="w-100 p-2" type="text" aria-label="Nama Instansi" placeholder="Nama Instansi" v-model="pesan.instansi">
+            </div>
+            
             <!-- TANGGAL -->
             <div class="form-group">
               <label for="tgl_pinjam">Tanggal Pinjam (Lihat jadwal kosong pada tabel jadwal dibawah)</label>
                 <br>
-                <input class="mb-3" type="date" id="date" v-model="pesan.tgl_pinjam">
-                
-              <p>Tanggal : {{ pesan.tgl_pinjam }}</p>
+                <input class="p-2" type="date" id="date" v-model="pesan.tgl_pinjam">
+              <!-- <p>Tanggal : {{ pesan.tgl_pinjam }}</p> -->
             </div>
 
             <!-- JAM -->
             <div class="form-group">
-              <label for="jam_start">Waktu Awal</label>
+              <label for="jam_start">Jam In</label>
               <br>
-                <input type="time" id="time" v-model="pesan.jam_start">
+                <input class="p-2" type="time" id="time" v-model="pesan.jam_start">
             </div>
 
             <div class="form-group">
-              <label for="jam_end">Waktu Akhir</label>
+              <label for="jam_end">Jam Out</label>
               <br>
-                <input type="time" id="time" v-model="pesan.jam_end">
+                <input class="p-2" type="time" id="time" v-model="pesan.jam_end">
             </div>
 
             <div class="form-group">
               <label for="keterangan">Keperluan (Harus jelas)</label>
               <textarea
                 v-model="pesan.keterangan"
-                class="form-control"
-                placeholder="Contoh : Nama Ormawa, Nama anggota peminjam ..">
+                class="form-control" rows="5"
+                placeholder="Contoh : Rapat UKM ...">
               </textarea>
             </div>
-
+            <div class="mt-4 mb-3">
+                Cek kembali form anda sebelum submit!
+            </div>
             <button type="submit" class="btn btn-success" @click="pemesanan">
               Pinjam
             </button>
+
+            <router-link to="/user/ruangan">
+              <button type="submit" class="btn btn-danger ml-3">
+              Cancel
+              </button>
+            </router-link>
           </form>
         </div>
       </div>
     </div>
 
-      <div class="container">
+      <div class="mr-5 ml-5">
         <hr>
         <!-- tabel peminjaman universal-->
         <Pesanan />
@@ -96,7 +117,6 @@ export default {
     setProduct(data) {
       this.product = data;
     }, 
-
     // async getProducts() {
     //   try {
     //     const response = await axios.get("http://localhost:3000/products/:id");
@@ -108,7 +128,7 @@ export default {
 
     pemesanan() {
         // this.atas_nama = this.email;
-        // this.atas_nama = currentUser.username;
+        this.pesan.email = this.currentUser.email;
         this.pesan.status = "Diproses";
         this.pesan.products = this.product;
         axios
@@ -131,11 +151,11 @@ export default {
       .then((response) => this.setProduct(response.data))
       .catch((error) => console.log(error));
   },
-  // computed: {
-  //   currentUser() {
-  //     return this.$store.state.auth.user;
-  //   }
-  // },
+  computed: {
+    currentUser() {
+      return this.$store.state.auth.user;
+    }
+  },
 };
 </script>
 

@@ -58,7 +58,7 @@
     </div>
     
   </div>
-  <footer class="navbar navbar-expand bg-primary text-light">Peminjaman Ruangan STMIK Primakara. Prototype by Kelompok 3.</footer>
+      <footer class="navbar navbar-expand bg-primary text-light">Peminjaman Ruangan STMIK Primakara. Prototype by Kelompok 3.</footer>
 </template>
 
 <script>

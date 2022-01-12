@@ -1,5 +1,5 @@
 <template>
-    <div class="d-flex flex-column flex-shrink-0 bg-dark vh-100% p-3 ml-3" style="max-width: 145px;min-height: 900px">
+    <div class="d-flex flex-column flex-shrink-0 bg-dark vh-100% p-2 ml-3" style="max-width: 145px;min-height: 900px">
         <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
             <li class="nav-item">
                 <router-link to="/home" class="nav-link text-white">
@@ -12,7 +12,7 @@
             </li>
             <br>
             <li v-if="showAdminBoard" class="nav-item">
-                <router-link to="/admin/peminjaman" class="nav-link text-white">Requests</router-link>
+                <router-link to="/admin/peminjaman" class="nav-link text-white">Peminjaman</router-link>
             </li>
             <br>
             <li v-if="showAdminBoard" class="nav-item">
