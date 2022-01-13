@@ -1,7 +1,6 @@
 <template>
     <div class="row">
         <Sidebar />
-
         <div class="col">
             <!-- CONTENT -->
             <div class="container">   
@@ -43,7 +42,7 @@
                             <div class="mt-2">Jumlah Meja Terbaru : <strong>{{ meja }}</strong></div>
                         </div>
                     <hr />
-                        <button type="submit" class="btn btn-success" @click="editRuangan(product.id)">
+                        <button type="submit" class="btn btn-success" @click="updateProduct(product.id)">
                         Simpan
                         </button>
                         <router-link to="/admin/ruangan">
@@ -51,7 +50,6 @@
                             Cancel
                             </button>
                         </router-link>
-                        
                     </form>
                     </div>
                 </div>
@@ -73,34 +71,54 @@ export default {
     data() {
         return {
         product: {},
-        kursi: '',
-        meja: ''
+        kursi: "",
+        meja: ""
         };
     },
     methods: {
-        setProduct(data) {
+        //JSON
+    setProduct(data) {
         this.product = data;
-        },
-        
-        editRuangan(id) {
-        // this.edit.kursi = this.products.kursi;
-        // this.edit.meja = this.products.meja;
-        axios
-            .patch("http://localhost:3000/products/"+ id, {
+    },
+
+    async updateProduct() {
+        try {
+            await axios.put(
+                `http://localhost:3000/products/${this.$route.params.id}`,
+            {
                 kursi: this.kursi,
                 meja: this.meja,
-            })
-            .then(() => {
-                this.$router.push({ path: "/admin/ruangan"})
-                this.$toast.success("Sukses Edit Ruangan", {
-                type: "success",
-                position: "top-right",
-                duration: 3000,
-                dismissible: true,
-                });
-            })
-            .catch((err) => console.log(err));
+            }
+        );
+        this.kursi = "";
+        this.meja = "";
+        this.$router.push("/admin/ruangan/");
+        } catch (err) {
+            console.log(err);
+        }
     },
+
+//DB JSON
+    //     updateProduct(id) {
+    //     // this.edit.kursi = this.products.kursi;
+    //     // this.edit.meja = this.products.meja;
+    //     axios
+    //         .patch("http://localhost:3000/products/"+ id, {
+    //             kursi: this.kursi,
+    //             meja: this.meja,
+    //         })
+    //         .then(() => {
+    //             this.$router.push({ path: "/admin/ruangan"})
+    //             this.$toast.success("Sukses Edit Ruangan", {
+    //             type: "success",
+    //             position: "top-right",
+    //             duration: 3000,
+    //             dismissible: true,
+    //             });
+    //         })
+    //         .catch((err) => console.log(err));
+    // },
+
     },
     mounted() {
         axios

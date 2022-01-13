@@ -24,7 +24,7 @@ export const showKeranjangById = (req, res) => {
 }
 
 // Create New Keranjang
-export const createKeranjang = (req, res) => {
+export const pemesanan = (req, res) => {
     const data = req.body;
     insertKeranjang(data, (err, results) => {
         if (err){

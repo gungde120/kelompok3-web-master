@@ -14,6 +14,7 @@
                 <tr>
                 <th scope="col">No.</th>
                 <th scope="col">Nama Lengkap</th>
+                <th scope="col">Instansi</th>
                 <th scope="col">Ruang</th>
                 <th scope="col">Tanggal</th>
                 <th scope="col">Jam</th>
@@ -25,8 +26,9 @@
                 <tr v-for="(keranjang, index) in keranjangs" :key="keranjang.id">
                     <th>{{index+1}}</th>
                         <td >{{ keranjang.nama_lengkap }}</td>
+                        <td >{{ keranjang.instansi }}</td>
                         <td>
-                            <strong>{{ keranjang.products.kode }}</strong>
+                            <strong>{{ keranjang.kodeProduct }}</strong>
                         </td>
                         <td >{{ keranjang.tgl_pinjam }}</td>
                         <td >{{ keranjang.jam_start }} - {{ keranjang.jam_end }} </td>
@@ -40,7 +42,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
 import axios from "axios";
 
 export default {
@@ -54,6 +55,7 @@ export default {
     setKeranjangs(data) {
         this.keranjangs = data;
     },
+    
     },
     mounted() {
     axios

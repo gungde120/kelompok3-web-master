@@ -79,9 +79,21 @@ export default {
       pesan: {},
     };
   },
+  created() {
+    this.getKeranjangs();
+  },
   methods: {
     setKeranjangs(data) {
       this.keranjangs = data;
+    },
+
+    async getKeranjangs() {
+      try {
+        const response = await axios.get("http://localhost:3000/keranjangs");
+        this.keranjangs = response.data;
+      } catch (err) {
+        console.log(err);
+      }
     },
     // hapusKeranjang(id) {
     //   axios
@@ -104,13 +116,12 @@ export default {
     //     .catch((error) => console.log(error));
     // },
   },
-  mounted() {
-    // JIKA USERNAME DI KERANJANG = USERNAME SAAT INI, MAKA
-      axios
-        .get("http://localhost:3000/keranjangs")
-        .then((response) => this.setKeranjangs(response.data))
-        .catch((error) => console.log(error));
-  },
+  // mounted() {
+  //     axios
+  //       .get("http://localhost:3000/keranjangs")
+  //       .then((response) => this.setKeranjangs(response.data))
+  //       .catch((error) => console.log(error));
+  // },
   computed: {
     currentUser() {
       return this.$store.state.auth.user;

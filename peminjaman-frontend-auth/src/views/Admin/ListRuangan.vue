@@ -30,7 +30,7 @@
 
                     <td>
                         <img
-                        :src=" '../images/' + product.gambar "
+                        :src=" '/images/' + product.gambar "
                         class="img-fluid shadow"
                         width="200"
                         />
@@ -114,7 +114,7 @@
         // .catch((error) => console.log(error));
         // },
 
-        // HAPUS RUANGAN
+    // HAPUS RUANGAN
         hapusRuangan(id) {
         axios
             .delete("http://localhost:3000/products/" + id)
@@ -126,46 +126,14 @@
                 dismissible: true,
             });
 
-            // Update Data Ruangan
-            axios
-            .get("http://localhost:3000/products")
-            .then((response) => this.setProducts(response.data))
-            .catch((error) => console.log(error));
+        // Update Data Ruangan
+        axios
+        .get("http://localhost:3000/products")
+        .then((response) => this.setProducts(response.data))
+        .catch((error) => console.log(error));
         })
         .catch((error) => console.log(error));
-    },
-    // checkout() {
-    //   // if (this.pesan.nama && this.pesan.noMeja) {
-    //     this.pesan.keranjangs = this.keranjangs;
-    //     axios
-    //       .post("http://localhost:3000/pesanans", this.pesan)
-    //       .then(() => {
-
-    //         // Hapus Semua Keranjang 
-    //         this.keranjangs.map(function (item) {
-    //           return axios
-    //             .delete("http://localhost:3000/keranjangs/" + item.id)
-    //             .catch((error) => console.log(error));
-    //         });
-
-    //         this.$router.push({ path: "/pesanan-sukses" });
-    //         this.$toast.success("Sukses Dipesan", {
-    //           type: "success",
-    //           position: "top-right",
-    //           duration: 3000,
-    //           dismissible: true,
-    //         });
-    //       })
-    //       .catch((err) => console.log(err));
-      // } else {
-      //   this.$toast.error("Nama dan Nomor Meja Harus diisi", {
-      //     type: "error",
-      //     position: "top-right",
-      //     duration: 3000,
-      //     dismissible: true,
-      //   });
-      // }
-    // },
+    }
     },
     mounted() {
         axios

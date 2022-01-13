@@ -18,6 +18,7 @@
                             <th scope="col">No.</th>
                             <th scope="col">Nama Lengkap</th>
                             <th scope="col">Email</th>
+                            <th scope="col">Instansi</th>
                             <th scope="col">Ruangan</th>
                             <th scope="col">Tanggal</th>
                             <th scope="col">Jam</th>
@@ -32,8 +33,9 @@
                             <th>{{index+1}}</th>
                             <td >{{ keranjang.nama_lengkap }}</td>
                             <td >{{ keranjang.email }}</td>
+                            <td >{{ keranjang.instansi }}</td>
                             <td>
-                                <strong>{{ keranjang.products.kode }}</strong>
+                                <strong>{{ keranjang.kodeProduct }}</strong>
                             </td>
                             <!-- TGL -->
                             <td >{{ keranjang.tgl_pinjam }}</td>
@@ -46,11 +48,10 @@
                             <td ><strong>{{ keranjang.status }}</strong></td>
                             <td > 
                                 <div>
-                                    <button type="button" class="btn btn-success mr-2 mb-2" @click="terimapinjam(keranjang.id)">
+                                    <button type="button" class="btn btn-success mr-2 mb-2" @click="okPinjam(keranjang.id)">               
                                         OK
                                     </button>
-                                <!-- <hr> -->
-                                    <button type="button" class="btn btn-danger mb-2" @click="tolakpinjam(keranjang.id)">
+                                    <button type="button" class="btn btn-danger mb-2" @click="cancelPinjam(keranjang.id)">
                                         Cancel
                                     </button>
                                 </div>
@@ -58,7 +59,7 @@
 
                             <!-- HAPUS -->
                             <td>
-                                <button type="button" class="btn btn-danger mb-2" @click="hapusKeranjang(keranjang.id)">
+                                <button type="button" class="btn btn-danger mb-2" @click="deleteKeranjang(keranjang.id)">
                                     Hapus
                                 </button>   
                             </td>
@@ -88,6 +89,7 @@
     data() {
         return {
         keranjangs: [],
+        status: "OK",
         };
     },
     methods: {
@@ -95,75 +97,125 @@
         this.keranjangs = data;
         },
 
-// TERIMAPINJAM
-        terimapinjam(id) {
-        axios
-            .patch("http://localhost:3000/keranjangs/" + id, {
-                status: "OK"
-            })
-            .then(() => {
-            this.$router.push({ path: "/admin/peminjaman"})
-            // this.$toast.error("Sukses Menerima Peminjaman", {
-            //     type: "success",
-            //     position: "top-right",
-            //     duration: 3000,
-            //     dismissible: true,
-            // });
-
-            // Update Data keranjang
-            axios
-            .get("http://localhost:3000/keranjangs")
-            .then((response) => this.setKeranjangs(response.data))
-            .catch((error) => console.log(error));
-        })
-        .catch((error) => console.log(error));
+        //EXPRESS
+        async getKeranjangs() {
+        try {
+        const response = await axios.get("http://localhost:3000/keranjangs");
+        this.keranjangs = response.data;
+        } catch (err) {
+        console.log(err);
+        }
         },
+        
+
+        async okPinjam(id) {
+            try {
+                await axios.put(
+                    `http://localhost:3000/keranjangs/${id}`,
+                    {
+                        status: "OK",                        
+                    }
+                );
+                this.getKeranjangs();
+            } catch (err) {
+                console.log(err);
+            }
+        },
+
+        async cancelPinjam(id) {
+            try {
+                await axios.put(
+                    `http://localhost:3000/keranjangs/${id}`,
+                    {
+                        status: "Cancel",                        
+                    }
+                );
+                this.getKeranjangs();
+            } catch (err) {
+                console.log(err);
+            }
+        },
+            
+        
+        async deleteKeranjang(id) {
+            try {
+                await axios.delete(`http://localhost:3000/keranjangs/${id}`);
+                this.getKeranjangs();
+            } catch (err) {
+                console.log(err);
+            }
+        },
+
+// DB JSON FOR DUMMY DATA TEST
+        // TERIMAPINJAM
+        // terimapinjam(id) {
+        // axios
+        //     .patch("http://localhost:3000/keranjangs/" + id, {
+        //         status: "OK"
+        //     })
+        //     .then(() => {
+        //     this.$router.push({ path: "/admin/peminjaman"})
+        //     // this.$toast.error("Sukses Menerima Peminjaman", {
+        //     //     type: "success",
+        //     //     position: "top-right",
+        //     //     duration: 3000,
+        //     //     dismissible: true,
+        //     // });
+
+        //     // Update Data keranjang
+        //     axios
+        //     .get("http://localhost:3000/keranjangs")
+        //     .then((response) => this.setKeranjangs(response.data))
+        //     .catch((error) => console.log(error));
+        // })
+        // .catch((error) => console.log(error));
+        // },
 
 // TOLAKPINJAM
-        tolakpinjam(id) {
-        axios
-            .patch("http://localhost:3000/keranjangs/" + id, {
-                status: "Cancel"
-            })
-            .then(() => {
-            this.$router.push({ path: "/admin/peminjaman"})
-            // this.$toast.error("Sukses Menolak Peminjaman", {
-            //     type: "success",
-            //     position: "top-right",
-            //     duration: 3000,
-            //     dismissible: true,
-            // });
+        // tolakpinjam(id) {
+        // axios
+        //     .patch("http://localhost:3000/keranjangs/" + id, {
+        //         status: "Cancel"
+        //     })
+        //     .then(() => {
+        //     this.$router.push({ path: "/admin/peminjaman"})
+        //     // this.$toast.error("Sukses Menolak Peminjaman", {
+        //     //     type: "success",
+        //     //     position: "top-right",
+        //     //     duration: 3000,
+        //     //     dismissible: true,
+        //     // });
 
-            // Update Data keranjang
-            axios
-            .get("http://localhost:3000/keranjangs")
-            .then((response) => this.setKeranjangs(response.data))
-            .catch((error) => console.log(error));
-        })
-        .catch((error) => console.log(error));
-        },
+        //     // Update Data keranjang
+        //     axios
+        //     .get("http://localhost:3000/keranjangs")
+        //     .then((response) => this.setKeranjangs(response.data))
+        //     .catch((error) => console.log(error));
+        // })
+        // .catch((error) => console.log(error));
+        // },
 
 // HAPUS KERANJANG
-        hapusKeranjang(id) {
-        axios
-            .delete("http://localhost:3000/keranjangs/" + id)
-            .then(() => {
-            this.$router.push({ path: "/admin/peminjaman"});
-            // this.$toast.error("Sukses Hapus Peminjaman", {
-            //     type: "error",
-            //     position: "top-right",
-            //     duration: 3000,
-            //     dismissible: true,
-            // });
+        // hapusKeranjang(id) {
+        // axios
+        //     .delete("http://localhost:3000/keranjangs/" + id)
+        //     .then(() => {
+        //     this.$router.push({ path: "/admin/peminjaman"});
+        //     // this.$toast.error("Sukses Hapus Peminjaman", {
+        //     //     type: "error",
+        //     //     position: "top-right",
+        //     //     duration: 3000,
+        //     //     dismissible: true,
+        //     // });
 
-            // Update Data keranjang
-            axios
-            .get("http://localhost:3000/keranjangs")
-            .then((response) => this.setKeranjangs(response.data))
-            .catch((error) => console.log(error));
-        })
-        .catch((error) => console.log(error));
-        },
+        //     // Update Data keranjang
+        //     axios
+        //     .get("http://localhost:3000/keranjangs")
+        //     .then((response) => this.setKeranjangs(response.data))
+        //     .catch((error) => console.log(error));
+        // })
+        // .catch((error) => console.log(error));
+        // },
     },
     mounted() {
         axios

@@ -117,33 +117,46 @@ export default {
     setProduct(data) {
       this.product = data;
     }, 
-    // async getProducts() {
-    //   try {
-    //     const response = await axios.get("http://localhost:3000/products/:id");
-    //     this.products = response.data;
-    //   } catch (err) {
-    //     console.log(err);
-    //   }
-    // },
-
-    pemesanan() {
-        // this.atas_nama = this.email;
+    
+    async pemesanan() {
+      try {
+        await axios.post("http://localhost:3000/keranjangs", {
+          nama_lengkap: this.pesan.nama_lengkap,
+          email: this.currentUser.email,
+          instansi: this.pesan.instansi,
+          kodeProduct: this.product.kode,
+          tgl_pinjam: this.pesan.tgl_pinjam,
+          jam_start: this.pesan.jam_start,
+          jam_end: this.pesan.jam_end,
+          keterangan: this.pesan.keterangan,
+          status: "Diproses",
+        });
         this.pesan.email = this.currentUser.email;
-        this.pesan.status = "Diproses";
-        this.pesan.products = this.product;
-        axios
-          .post("http://localhost:3000/keranjangs", this.pesan)
-          .then(() => {
-            this.$router.push({ path: "/user/riwayat"})
-            // this.$toast.success("Sukses Masuk Pemesanan", {
-            //   type: "success",
-            //   position: "top-right",
-            //   duration: 3000,
-            //   dismissible: true,
-            // });
-          })
-          .catch((err) => console.log(err));
+        this.$router.push("/user/riwayat");
+      } catch (err) {
+        console.log(err);
+      }
     },
+
+    // DB JSON
+    // pemesanan() {
+    //     // this.atas_nama = this.email;
+    //     this.pesan.email = this.currentUser.email;
+    //     this.pesan.status = "Diproses";
+    //     this.pesan.products = this.product;
+    //     axios
+    //       .post("http://localhost:3000/keranjangs", this.pesan)
+    //       .then(() => {
+    //         this.$router.push({ path: "/user/riwayat"})
+    //         // this.$toast.success("Sukses Masuk Pemesanan", {
+    //         //   type: "success",
+    //         //   position: "top-right",
+    //         //   duration: 3000,
+    //         //   dismissible: true,
+    //         // });
+    //       })
+    //       .catch((err) => console.log(err));
+    // },
   },
   mounted() {
     axios
