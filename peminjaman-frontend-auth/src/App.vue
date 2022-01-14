@@ -1,20 +1,26 @@
 <template>
   <div id="app">
-    <nav class="navbar navbar-expand navbar-dark bg-primary">
+    <nav class="navbar navbar-expand navbar-light bg-light">
       <div class="">
-        <a href="/" class="navbar-brand p-3">STMIK Primakara</a>
+        <a href="/" class="navbar-brand p-2">
+          <img
+        id="profile-img"
+        src="/images/bigprimakara.png"
+        style="width: 120px;"
+      />
+        </a>
       </div>
 
     <!-- NAVBAR USER -->
     <ul class="nav nav-pills nav-flush flex-column text-center">
         <li class="nav-item">
-            <router-link v-if="currentUser" to="/user/ruangan" class="nav-link text-white">Ruangan</router-link>
+            <router-link v-if="currentUser" to="/user/ruangan" class="nav-link text-dark">Ruangan</router-link>
         </li>
     </ul>
 
     <ul class="nav nav-pills nav-flush flex-column text-center">
         <li class="nav-item">
-            <router-link v-if="currentUser" to="/user/riwayat" class="nav-link text-white">Riwayat</router-link>
+            <router-link v-if="currentUser" to="/user/riwayat" class="nav-link text-dark">Riwayat</router-link>
         </li>
     </ul>
     <!-- NAVBAR USER -->
@@ -34,13 +40,13 @@
 
       <div v-if="currentUser" class="navbar-nav ml-auto">
         <li class="nav-item">
-          <router-link to="/profile" class="nav-link">
+          <router-link to="/profile" class="nav-link text-dark">
             <font-awesome-icon icon="user" />
             {{ currentUser.username }}
           </router-link>
         </li>
         <li class="nav-item">
-          <a class="nav-link" @click.prevent="logOut">
+          <a class="nav-link text-dark" @click.prevent="logOut">
             <font-awesome-icon icon="sign-out-alt" /> LogOut
           </a>
         </li>
@@ -58,7 +64,8 @@
     </div>
     
   </div>
-      <footer class="navbar navbar-expand bg-primary text-light">Peminjaman Ruangan STMIK Primakara. Prototype by Kelompok 3.</footer>
+      <footer class="navbar navbar-expand bg-light text-dark text-center">
+        Peminjaman Ruangan STMIK Primakara. Prototype by Kelompok 3.</footer>
 </template>
 
 <script>
