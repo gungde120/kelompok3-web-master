@@ -11,7 +11,7 @@
             </h5>
             <router-link class="btn btn-success" :to="'/user/ruangan/'+product.id"> Pinjam</router-link>
         </div>
-</div>
+    </div>
 </template>
 
 <script>

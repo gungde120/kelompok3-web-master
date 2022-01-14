@@ -1,11 +1,12 @@
 <template>
   <div class="banner w-100 vh-100 d-flex justify-content-center align-items-center">
-          <div class="container col-md-9 text-left">
-              <h2 class="display-3 fw-bold">Selamat Datang</h2>
-              <h2 class="display-5 ">Sistem Informasi Peminjaman Ruangan
+          <div class="container col-md-9 text-left ">
+              <h2 class="display-3 font-weight-bold">Selamat Datang</h2>
+              <h2 class="display-5 font-weight-bold">Sistem Informasi Peminjaman Ruangan
                 <br>
               STMIK PRIMAKARA
               </h2>
+              <br>
               <a href="/user/ruangan">
                   <button class="btn btn-success btn-lg" type="button">Pinjam</button>
               </a>

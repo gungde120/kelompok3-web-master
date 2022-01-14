@@ -46,14 +46,14 @@ function initial() {
     id: 1,
     name: "user"
   });
- 
+
   Role.create({
     id: 2,
-    name: "moderator"
+    name: "admin"
   });
- 
+
   Role.create({
     id: 3,
-    name: "admin"
+    name: "moderator"
   });
 }

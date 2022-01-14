@@ -67,7 +67,7 @@
         //     console.log(err);
         //   }
         // },
-        mounted() {
+    mounted() {
         axios
             .get("http://localhost:3000/products")
             .then((response) => this.setProducts(response.data))

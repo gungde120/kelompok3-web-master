@@ -46,7 +46,7 @@
 
                     <!-- EDIT -->
                     <td>
-                        <router-link :to="'/admin/ruangan/editruangan/'+product.id">
+                        <router-link :to="'/moderator/ruangan/editruangan/'+product.id">
                             <button type="button" class="btn btn-primary">
                                 Edit
                             </button>
@@ -76,7 +76,7 @@
     import Sidebar from "@/components/Sidebar.vue";
 
     export default {
-    name: "ListRuangan",
+    name: "ModListRuangan",
     components: {
         Sidebar,
     },

@@ -11,6 +11,10 @@ import EditRuangan from './views/Admin/EditRuangan.vue';
 import ListRuangan from './views/Admin/ListRuangan.vue';
 import ListPeminjaman from './views/Admin/ListPinjam.vue';
 
+//MODERATOR
+import ModEditRuangan from './views/Moderator/ModEditRuangan.vue';
+import ModListRuangan from './views/Moderator/ModListRuangan.vue';
+
 // lazy-loaded
 const Profile = () => import("./views/Profile.vue")
 const BoardAdmin = () => import("./views/Admin/BoardAdmin.vue")
@@ -65,10 +69,20 @@ const routes = [
 
   // MOD
   {
-    path: "/mod",
+    path: "/moderator",
     name: "moderator",
     // lazy-loaded
     component: BoardModerator,
+  },
+  {
+    path: '/moderator/ruangan',
+    name: 'ListRuangan',
+    component: ModListRuangan
+  },
+  {
+    path: '/moderator/ruangan/editruangan/:id',
+    name: 'EditRuangan',
+    component: ModEditRuangan
   },
 
   //USER

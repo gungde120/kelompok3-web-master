@@ -2,23 +2,29 @@
     <div class="d-flex flex-column flex-shrink-0 bg-dark vh-100% p-2 ml-3" style="max-width: 145px;min-height: 900px">
         <ul class="nav nav-pills nav-flush flex-column mb-auto text-center">
             <li class="nav-item">
-                <router-link to="/home" class="nav-link text-white">
+                <router-link to="/home" class="nav-link text-white mb-3">
                 <font-awesome-icon icon="home"/> Home
             </router-link>
             </li>
-            <br>
+
+            <!-- ADMIN -->
             <li v-if="showAdminBoard" class="nav-item">
-                <router-link to="/admin" class="nav-link text-white">Dashboard</router-link>
+                <router-link to="/admin" class="nav-link text-white mb-3">Dashboard</router-link>
             </li>
-            <br>
             <li v-if="showAdminBoard" class="nav-item">
-                <router-link to="/admin/peminjaman" class="nav-link text-white">Peminjaman</router-link>
+                <router-link to="/admin/peminjaman" class="nav-link text-white mb-3">Peminjaman</router-link>
             </li>
-            <br>
             <li v-if="showAdminBoard" class="nav-item">
-                <router-link to="/admin/ruangan" class="nav-link text-white">Edit Ruangan</router-link>
+                <router-link to="/moderator/ruangan" class="nav-link text-white mb-3">Edit Ruangan</router-link>
             </li>
-            <hr>
+            
+            <!-- MODERATOR -->
+            <li v-if="showModeratorBoard" class="nav-item">
+                <router-link to="/moderator" class="nav-link text-white mb-3">Dashboard</router-link>
+            </li>
+            <li v-if="showModeratorBoard" class="nav-item">
+                <router-link to="/moderator/ruangan" class="nav-link text-white mb-3">Edit Ruangan</router-link>
+            </li>
         </ul>
     </div>
 </template>
