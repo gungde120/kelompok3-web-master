@@ -6,12 +6,12 @@
 
         <div class="row mt-3">
             <div class="col">
-            <h2>
+            <h3>
                 List
                 <strong>Ruangan</strong>
-            </h2>
+            </h3>
             <div class="table-responsive mt-3">
-                <table class="table">
+                <table class="table ">
                 <thead>
                     <tr>
                     <th scope="col">No.</th>

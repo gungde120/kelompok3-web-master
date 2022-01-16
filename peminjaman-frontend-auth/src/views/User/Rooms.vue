@@ -1,45 +1,41 @@
 <template>
     <div class="container">
-        <!-- <Navbar />
-
-        <div class="container">
         <div class="row mt-4">
-            <div class="col">
-            <h2>
+            <div class="col ml-3">
+            <h3>
                 Daftar
                 <strong>Ruangan</strong>
-            </h2>
-            </div>
+            </h3>
+
+            <input
+                v-model="searchRoom"
+                type="search"
+                class="form-control text-center mt-3"
+                style="max-width: 21rem"
+                placeholder="Search Ruangan.."
+                aria-label="Cari"
+                aria-describedby="basic-addon1"    
+                />
+            </div>  
         </div>
 
-        <div>
-            
-        </div> -->
-
-        <div class="row mb-3">
-            <div class="col-md-4 mt-4" v-for="product in products" :key="product.id">
+        <div class="row mb-3 ml-auto">
+            <div class="col-md-4 mt-4" v-for="product in filteredproducts" :key="product.id">
             <Card :product="product" />
             </div>
         </div>
-        <hr>
-        <!-- <Pesanan />
-        </div> -->
     </div>
-    <div class="mr-5 ml-5">
+    <div>
         <hr>
         <!-- tabel peminjaman universal-->
-        <Pesanan />
+        <Jadwal />
     </div>
 </template>
 
     <script>
-    // @ is an alias to /src
-    // import Navbar from "@/components/Navbar.vue";
-    import Pesanan from "@/components/Pesanan.vue";
+    import Jadwal from "@/views/Jadwal.vue";
     import Card from "@/components/Card.vue";
     import axios from "axios";
-    //import NavbarUser from "@/components/NavbarUser.vue";
-    
 
     export default {
     name: "Rooms",
@@ -47,11 +43,12 @@
         Card,
         //NavbarUser,
         
-        Pesanan,
+        Jadwal,
     },
     data() {
         return {
         products: [],
+        searchRoom: '',
         };
     },
     methods: {
@@ -59,20 +56,24 @@
         this.products = data;
         },
     },
-        // async getProducts() {
-        //   try {
-        //     const response = await axios.get("http://localhost:3000/products");
-        //     this.products = response.data;
-        //   } catch (err) {
-        //     console.log(err);
-        //   }
-        // },
     mounted() {
         axios
             .get("http://localhost:3000/products")
             .then((response) => this.setProducts(response.data))
             .catch((error) => console.log(error));
         },
+    computed: {
+        filteredproducts() {
+        if(this.searchRoom) {
+        return this.products.filter(product => {
+            return product.nama.toLowerCase().includes(this.searchRoom.toLowerCase())
+            })
+        } else{
+            return this.products;
+        }
+    }
+    }
+    
     };
 </script>
 

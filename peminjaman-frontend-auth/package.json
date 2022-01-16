@@ -1,5 +1,5 @@
 {
-  "name": "vue-3-authentication-jwt",
+  "name": "Peminjaman-Ruangan",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -19,6 +19,7 @@
     "bootstrap-vue": "^2.21.2",
     "core-js": "^3.6.5",
     "jquery": "^3.6.0",
+    "moment": "^2.29.1",
     "popper.js": "^1.16.1",
     "vee-validate": "^4.3.5",
     "vue": "^3.0.0",

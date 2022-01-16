@@ -1,6 +1,6 @@
 #app {
     font-family: 'Montserrat', sans-serif;
-    min-height: 900px;
+    min-height: 780px;
 }
 
 .router-link-exact-active {
@@ -14,6 +14,8 @@
 .banner {
     background: url("/images/bg.jpg");
     background-size: cover;
+    height: 720px;
+    background-position: center;
     color: beige;
     font-size: small;
 }
@@ -21,6 +23,7 @@
 .banner1 {
     background: url("/images/bg.jpg");
     background-size: cover;
+    background-position: center;
     margin: 0;
     padding-top: 140px;
     height: 100vh;
@@ -54,12 +57,16 @@
     color: black;
 }
 
+.img {
+    background-image: url('../images/altimg.jpg') ;
+}
 
 .img-fluid {
     border-radius: 15px;
+    background-image: url('../images/altimg.jpg') ;
 }
 
 .footer {
-    position: absolute;
-    margin-bottom: 0;
+    text-align: center ;
+
 }

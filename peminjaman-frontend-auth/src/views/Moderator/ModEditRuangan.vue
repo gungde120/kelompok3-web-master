@@ -9,7 +9,7 @@
                         <img :src=" '/images/' + product.gambar" class="img-fluid" alt="">
                     </div>
                     
-                    <div class="col-md-6 mt-3">
+                    <div class="col-md-6">
                     <h2>
                         <strong>{{ product.nama }}</strong>
                     </h2>
@@ -25,26 +25,20 @@
                         <strong>{{ product.meja }}</strong>
                     </h5>
 
-                    <hr />
-                    <form class="mt-4" v-on:submit.prevent>
-                        
+                    <form class="mt-4" v-on:submit.prevent @submit="updateProduct(product.id)" aria-required="true"> 
                         <div>
                             Ubah Jumlah Kursi
                             <br>
-                            <input class="form-control" v-model="kursi" type="number" placeholder="Masukkan Angka"/>
-                            <div class="mt-2">Jumlah Kursi Terbaru : <strong>{{ kursi }}</strong> </div>
+                            <input class="form-control" v-model="kursi" type="number" placeholder="Masukkan Angka" required/>
                         </div>
-                    <hr />
+                    <br>
                         <div>
                             Ubah Jumlah Meja
                             <br>
-                            <input class="form-control" v-model="meja" type="number" placeholder="Masukkan Angka"/>
-                            <div class="mt-2">Jumlah Meja Terbaru : <strong>{{ meja }}</strong></div>
+                            <input class="form-control" v-model="meja" type="number" placeholder="Masukkan Angka" required/>
                         </div>
-                    <hr />
-                        <button type="submit" class="btn btn-success" @click="updateProduct(product.id)">
-                        Simpan
-                        </button>
+                    <br>
+                        <input type="submit" value="Simpan" class="btn btn-success">
                         <router-link to="/moderator/ruangan">
                             <button type="submit" class="btn btn-danger ml-3">
                             Cancel
@@ -97,6 +91,8 @@ export default {
             console.log(err);
         }
     },
+
+    
 
 //DB JSON
     //     updateProduct(id) {

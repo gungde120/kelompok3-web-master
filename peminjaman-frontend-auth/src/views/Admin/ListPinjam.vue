@@ -1,26 +1,40 @@
 <template>
     <div class="row">
         <Sidebar />
-        <div class="col">
+        <div class="col ml-3">
             <div class="keranjang">
-                <div class="ml-2">
+                <div class="ml">
 
                 <div class="row">
-                    <div class="col mt-3">
-                    <h2>
+                    <div class="col-fluid mt-3">
+                    <h3>
                         Request
                         <strong>Peminjaman</strong>
-                    </h2>
-                    <div class="table-responsive mt-3">
-                        <table class="table">
-                        <thead>
+                    </h3>
+                    </div>
+
+                    <div class="col mt-3 ml-5">
+                        <input
+                        v-model="searchPinjam"
+                        type="search"
+                        class="form-control text-center"
+                        style="max-width: 21rem"
+                        placeholder="Search By Tanggal.."
+                        aria-label="Cari"
+                        aria-describedby="basic-addon1"
+                        />
+                    </div>
+
+                    <div class="table-responsive mt-3 text-center">
+                        <table class="table table-striped table-bordered">
+                        <thead class="table-dark">
                             <tr>
                             <th scope="col">No.</th>
+                            <th scope="col">Tanggal</th>
                             <th scope="col">Nama Lengkap</th>
                             <th scope="col">Email</th>
                             <th scope="col">Instansi</th>
                             <th scope="col">Ruangan</th>
-                            <th scope="col">Tanggal</th>
                             <th scope="col">Jam</th>
                             <th scope="col">Keperluan</th>
                             <th scope="col">Status</th>
@@ -29,16 +43,18 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr v-for="(keranjang, index) in keranjangs" :key="keranjang.id">
+                            <tr v-for="(keranjang, index) in filteredkeranjangs" :key="keranjang.id">
                             <th>{{index+1}}</th>
+                            <!-- TGL -->
+                            <td >
+                                {{ keranjang.tgl_pinjam }}
+                            </td>
                             <td >{{ keranjang.nama_lengkap }}</td>
                             <td >{{ keranjang.email }}</td>
                             <td >{{ keranjang.instansi }}</td>
                             <td>
                                 <strong>{{ keranjang.kodeProduct }}</strong>
-                            </td>
-                            <!-- TGL -->
-                            <td >{{ keranjang.tgl_pinjam }}</td>
+                            </td>                            
                             <!-- JAM -->
                             <td >{{ keranjang.jam_start }} - {{ keranjang.jam_end }} </td>
                             <!-- KEPERLUAN -->
@@ -48,19 +64,26 @@
                             <td ><strong>{{ keranjang.status }}</strong></td>
                             <td > 
                                 <div>
-                                    <button type="button" class="btn btn-success mr-2 mb-2" @click="okPinjam(keranjang.id)">               
-                                        OK
+                                    <button type="button" class="btn btn-success mr-2 mb-2 p-0" @click="okPinjam(keranjang.id)">               
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="fas fa-check" viewBox="0 0 16 16">
+                                        <path d="M10.97 4.97a.75.75 0 0 1 1.07 1.05l-3.99 4.99a.75.75 0 0 1-1.08.02L4.324 8.384a.75.75 0 1 1 1.06-1.06l2.094 2.093 3.473-4.425a.267.267 0 0 1 .02-.022z"/>
+                                        </svg>
                                     </button>
-                                    <button type="button" class="btn btn-danger mb-2" @click="cancelPinjam(keranjang.id)">
-                                        Cancel
+                                    <button type="button" class="btn btn-danger mb-2 p-0" @click="cancelPinjam(keranjang.id)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" class="bi bi-x" viewBox="0 0 16 16">
+                                        <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+                                        </svg>
                                     </button>
                                 </div>
                             </td>
 
                             <!-- HAPUS -->
                             <td>
-                                <button type="button" class="btn btn-danger mb-2" @click="deleteKeranjang(keranjang.id)">
-                                    Hapus
+                                <button type="button" class="btn btn-danger mb-2 py-1 px-2" @click="deleteKeranjang(keranjang.id)">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+                                            <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"/>
+                                            <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"/>
+                                        </svg>
                                 </button>   
                             </td>
                             
@@ -69,7 +92,7 @@
                         </tbody>
                         </table>
                     </div>
-                    </div>
+                    
                 </div>
                 </div>
             </div>
@@ -89,7 +112,8 @@
     data() {
         return {
         keranjangs: [],
-        status: "OK",
+        searchPinjam: '',
+        searchStatus: '',
         };
     },
     methods: {
@@ -226,7 +250,23 @@
     computed: {
     currentUser() {
         return this.$store.state.auth.user;
+    },
+
+    filteredkeranjangs() {
+        if(this.searchPinjam) {
+        return this.keranjangs.filter(keranjang => {
+            return keranjang.tgl_pinjam.toLowerCase().includes(this.searchPinjam.toLowerCase())
+            })
+        } 
+        // if(this.searchStatus) {
+        // return this.keranjangs.filter(keranjang => {
+        //     return keranjang.status.toLowerCase().includes(this.searchStatus.toLowerCase())
+        //     })
+        // } 
+        else{
+            return this.keranjangs;
         }
+    }
     },
 };
 </script>

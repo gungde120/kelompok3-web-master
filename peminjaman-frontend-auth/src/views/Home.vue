@@ -7,7 +7,7 @@
               STMIK PRIMAKARA
               </h2>
               <br>
-              <a href="/user/ruangan">
+              <a href="/login">
                   <button class="btn btn-success btn-lg" type="button">Pinjam</button>
               </a>
           </div>

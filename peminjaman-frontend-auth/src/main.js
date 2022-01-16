@@ -1,4 +1,4 @@
-// import Vue from 'vue'
+// import Vue from 'vue';
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router";
@@ -9,8 +9,16 @@ import 'vue-toast-notification/dist/theme-default.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import "bootstrap";
 import "bootstrap/dist/css/bootstrap.min.css";
-import { FontAwesomeIcon } from './plugins/font-awesome'
-import './assets/css/main.css'
+import { FontAwesomeIcon } from './plugins/font-awesome';
+import './assets/css/main.css';
+// import moment from 'moment';
+
+// Vue.config.productionTip = false
+// Vue.filter('formatDate', function(value) {
+//   if (value) {
+//     return moment(String(value)).format('MM/DD/YYYY')
+//   }
+// });
 
 // Vue.use(VueToast);
 // Vue.use(BootstrapVue)

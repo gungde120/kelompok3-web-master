@@ -2,7 +2,7 @@
   <div class="row">
     <Sidebar />
 
-    <div class="container">
+    <div class="container" style="display:flex;">
       <div class="row">
 
         <!-- <div class="col mt-4">
@@ -17,12 +17,14 @@
           </div>
         </div> -->
       
+        <!-- <div class="row"> -->
         <div class="col mt-4">
           <div class="card col" style="width: 18rem; height: 18rem; text-align: center;">
-            <div class="mt-3" style="text-align: center; font-size: 5rem; font-weight: bold;">{{ jumlahRuangan }}</div>
-            <div class="card-body">
-              <h5 class="card-title">Jumlah Ruangan</h5>
-              <router-link class="btn btn-success mt-3 px-5" to="/admin/ruangan">Detail</router-link>
+            <div class="mt-3" style="text-align: center; font-size: 5rem; font-weight: bold;">
+              {{ jumlahRuangan }}</div>
+              <div class="card-body">
+                <h5 class="card-title">Jumlah Ruangan</h5>
+                <router-link class="btn btn-success mt-3 px-5" to="/moderator/ruangan">Detail</router-link>
             </div>
           </div>
         </div>
@@ -37,6 +39,11 @@
             </div>
           </div>
         </div>
+        <!-- </div> -->
+        
+            
+
+        
       </div>
     </div>
     
@@ -62,7 +69,6 @@ export default {
     };
   },
   methods: {
-      
       setUsers(data) {
       this.jumlahUser = data.length;
       },

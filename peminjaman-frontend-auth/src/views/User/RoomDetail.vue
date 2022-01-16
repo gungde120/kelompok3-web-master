@@ -24,60 +24,59 @@
 
             <div class="col">
 
-          <form v-on:submit.prevent>
+          <form v-on:submit.prevent @submit="pemesanan" aria-required="true">
             <h3>
               <strong>
                 Form Peminjaman
               </strong>
             </h3>
 
-            <div class="form-group">
-              <label for="jam_start">Nama Lengkap</label>
+            <div class="form-group" aria-required="true">
+              <label for="nama_lengkap">Nama Lengkap</label>
               <br>
-              <input class="w-100 p-2" type="text" aria-label="Nama Lengkap" placeholder="Nama lengkap" v-model="pesan.nama_lengkap">
+              <input class="w-100 p-2" type="text" aria-label="Nama Lengkap" placeholder="Nama lengkap" v-model="pesan.nama_lengkap" required />
             </div>
 
-            <div class="form-group">
-              <label for="jam_start">Instansi</label>
+            <div class="form-group" aria-required="true">
+              <label for="instansi">Instansi</label>
               <br>
-              <input class="w-100 p-2" type="text" aria-label="Nama Instansi" placeholder="Nama Instansi" v-model="pesan.instansi">
+              <input class="w-100 p-2" type="text" aria-label="Nama Instansi" placeholder="Nama Instansi" v-model="pesan.instansi" required />
             </div>
             
             <!-- TANGGAL -->
-            <div class="form-group">
-              <label for="tgl_pinjam">Tanggal Pinjam (Lihat jadwal kosong pada tabel jadwal dibawah)</label>
+            <div class="form-group" aria-required="true">
+              <label for="tgl_pinjam">Tanggal Pinjam (Cek kembali jadwal kosong pada tabel jadwal dibawah)</label>
                 <br>
-                <input class="p-2" type="date" id="date" v-model="pesan.tgl_pinjam">
+                <input class="p-2" type="date" id="date" v-model="pesan.tgl_pinjam" required />
               <!-- <p>Tanggal : {{ pesan.tgl_pinjam }}</p> -->
             </div>
 
             <!-- JAM -->
-            <div class="form-group">
+            <div class="form-group" aria-required="true">
               <label for="jam_start">Jam In</label>
               <br>
-                <input class="p-2" type="time" id="time" v-model="pesan.jam_start">
+                <input class="p-2" type="time" id="time" v-model="pesan.jam_start" required />
             </div>
 
-            <div class="form-group">
+            <div class="form-group" aria-required="true">
               <label for="jam_end">Jam Out</label>
               <br>
-                <input class="p-2" type="time" id="time" v-model="pesan.jam_end">
+                <input class="p-2" type="time" id="time" v-model="pesan.jam_end" required />
             </div>
 
-            <div class="form-group">
+            <div class="form-group" aria-required="true">
               <label for="keterangan">Keperluan (Harus jelas)</label>
               <textarea
                 v-model="pesan.keterangan"
                 class="form-control" rows="5"
-                placeholder="Contoh : Rapat UKM ...">
+                placeholder="Contoh : Rapat UKM ..."
+                aria-required="true" >
               </textarea>
             </div>
             <div class="mt-4 mb-3">
                 Cek kembali form anda sebelum submit!
             </div>
-            <button type="submit" class="btn btn-success" @click="pemesanan">
-              Pinjam
-            </button>
+            <input type="submit" value="Pinjam" class="btn btn-success">
 
             <router-link to="/user/ruangan">
               <button type="submit" class="btn btn-danger ml-3">
@@ -89,23 +88,23 @@
       </div>
     </div>
 
-      <div class="mr-5 ml-5">
+      <div>
         <hr>
         <!-- tabel peminjaman universal-->
-        <Pesanan />
+        <Jadwal />
       </div>
       
     </div>
 </template>
 
 <script>
-import Pesanan from "@/components/Pesanan.vue";
+import Jadwal from "@/views/Jadwal.vue";
 import axios from "axios";
 
 export default {
   name: "RoomDetail",
   components: {
-    Pesanan,
+    Jadwal,
   },
   data() {
     return {

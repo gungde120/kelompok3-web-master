@@ -2,7 +2,7 @@
   <div class="row">
     <Sidebar />
 
-    <div class="container">
+    <div class="container" style="display:flex;">
       <div class="row">
       
         <div class="col mt-4">

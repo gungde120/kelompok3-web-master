@@ -5,6 +5,7 @@ import Register from "./views/Register.vue";
 import Rooms from "./views/User/Rooms.vue";
 import RoomDetail from './views/User/RoomDetail.vue';
 import Keranjang from './views/User/Riwayat.vue';
+import Jadwal from './views/Jadwal.vue';
 
 //ADMIN
 import EditRuangan from './views/Admin/EditRuangan.vue';
@@ -14,6 +15,7 @@ import ListPeminjaman from './views/Admin/ListPinjam.vue';
 //MODERATOR
 import ModEditRuangan from './views/Moderator/ModEditRuangan.vue';
 import ModListRuangan from './views/Moderator/ModListRuangan.vue';
+import ModAddRuangan from './views/Moderator/ModAddRuangan.vue';
 
 // lazy-loaded
 const Profile = () => import("./views/Profile.vue")
@@ -80,6 +82,11 @@ const routes = [
     component: ModListRuangan
   },
   {
+    path: '/moderator/ruangan/addruangan',
+    name: 'ModAddRuangan',
+    component: ModAddRuangan
+  },
+  {
     path: '/moderator/ruangan/editruangan/:id',
     name: 'EditRuangan',
     component: ModEditRuangan
@@ -91,6 +98,10 @@ const routes = [
     name: "user",
     // lazy-loaded
     component: BoardUser,
+  },
+  {
+    path: "/jadwalpeminjaman",
+    component: Jadwal,
   },
   {
     path: "/user/ruangan",
@@ -121,8 +132,9 @@ router.beforeEach((to, from, next) => {
 
   // trying to access a restricted page + not logged in
   // redirect to login page
+  // or redirect to landing page
   if (authRequired && !loggedIn) {
-    next('/login');
+    next('/home');
   } else {
     next();
   }
