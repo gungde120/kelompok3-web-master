@@ -11,7 +11,7 @@
             <h6>
             Jumlah Meja : <strong>{{ product.meja }}</strong>
             </h6>
-            <router-link class="btn btn-success" :to="'/user/ruangan/'+product.id"> Pinjam</router-link>
+            <router-link class="btn btn-primary" :to="'/user/ruangan/'+product.id"> Pinjam</router-link>
         </div>
     </div>
 </template>

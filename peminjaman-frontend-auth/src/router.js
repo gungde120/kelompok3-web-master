@@ -6,6 +6,7 @@ import Rooms from "./views/User/Rooms.vue";
 import RoomDetail from './views/User/RoomDetail.vue';
 import Keranjang from './views/User/Riwayat.vue';
 import Jadwal from './views/Jadwal.vue';
+import EditProfile from './views/EditProfile.vue';
 
 //ADMIN
 import EditRuangan from './views/Admin/EditRuangan.vue';
@@ -46,6 +47,10 @@ const routes = [
     name: "profile",
     // lazy-loaded
     component: Profile,
+  },
+  {
+    path: "/profile/edit",
+    component: EditProfile,
   },
   {
     path: "/admin",

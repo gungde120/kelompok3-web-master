@@ -34,6 +34,7 @@
                 <!-- <th scope="col">Tanggal</th> -->
                 <th scope="col">Tanggal</th>
                 <th scope="col">Nama Lengkap</th>
+                <th scope="col">Email</th>
                 <th scope="col">Instansi</th>
                 <th scope="col">Ruang</th>
                 <th scope="col">Jam</th>
@@ -47,6 +48,7 @@
                     <th v-if="keranjang.email == this.currentUser.email" >{{index+1}}</th>
                         <td v-if="keranjang.email == this.currentUser.email">{{ keranjang.tgl_pinjam}}</td>
                         <td v-if="keranjang.email == this.currentUser.email">{{ keranjang.nama_lengkap }}</td>
+                        <td v-if="keranjang.email == this.currentUser.email">{{ keranjang.email }}</td>
                         <td v-if="keranjang.email == this.currentUser.email">{{ keranjang.instansi }}</td>
                         <td v-if="keranjang.email == this.currentUser.email">
                             <strong>{{ keranjang.kodeProduct }}</strong>

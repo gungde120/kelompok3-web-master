@@ -10,7 +10,7 @@
             <div class="mt-3" style="text-align: center; font-size: 5rem; font-weight: bold;">{{ jumlahRuangan }}</div>
             <div class="card-body">
               <h5 class="card-title">Jumlah Ruangan</h5>
-              <router-link class="btn btn-success mt-3 px-5" to="/moderator/ruangan">Detail</router-link>
+              <router-link class="btn btn-primary mt-3 px-5" to="/moderator/ruangan">Detail</router-link>
             </div>
           </div>
         </div>

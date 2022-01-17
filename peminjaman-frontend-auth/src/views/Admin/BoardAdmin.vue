@@ -24,7 +24,7 @@
               {{ jumlahRuangan }}</div>
               <div class="card-body">
                 <h5 class="card-title">Jumlah Ruangan</h5>
-                <router-link class="btn btn-success mt-3 px-5" to="/moderator/ruangan">Detail</router-link>
+                <router-link class="btn btn-primary mt-3 px-5" to="/moderator/ruangan">Detail</router-link>
             </div>
           </div>
         </div>
@@ -35,7 +35,7 @@
               {{ jumlahPeminjaman }}</div>
               <div class="card-body">
                 <h5 class="card-title">Jumlah Peminjaman</h5>
-                <router-link class="btn btn-success mt-3 px-5" to="/admin/peminjaman">Detail</router-link>
+                <router-link class="btn btn-primary mt-3 px-5" to="/admin/peminjaman">Detail</router-link>
             </div>
           </div>
         </div>

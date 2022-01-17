@@ -8,7 +8,7 @@
               </h2>
               <br>
               <a href="/login">
-                  <button class="btn btn-success btn-lg" type="button">Pinjam</button>
+                  <button class="btn btn-primary btn-lg" type="button">Pinjam</button>
               </a>
           </div>
     </div>
